@@ -1,0 +1,47 @@
+{
+  "errCode": 0,
+  "errMsg": "",
+  "isSuccess": true,
+  "datas": [
+    {
+      "title": "安心得利",
+      "yearYield": "6.88",
+      "yearAward": "0.15",
+      "term": "365",
+      "price": "200000",
+      "percent": "15"
+    },
+    {
+      "title": "安心得利",
+      "yearYield": "4.58",
+      "yearAward": "0",
+      "term": "115",
+      "price": "50000",
+      "percent": "77"
+    },
+    {
+      "title": "安心得利",
+      "yearYield": "4.55",
+      "yearAward": "0.1",
+      "term": "363",
+      "price": "10000",
+      "percent": "80"
+    },
+    {
+      "title": "安心得利",
+      "yearYield": "14.5",
+      "yearAward": "0",
+      "term": "80",
+      "price": "50000",
+      "percent": "45"
+    },
+    {
+      "title": "安心得利",
+      "yearYield": "4.8",
+      "yearAward": "0",
+      "term": "352",
+      "price": "50000",
+      "percent": "30"
+    }
+  ]
+}

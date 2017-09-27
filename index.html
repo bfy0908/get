@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=2,maximum-scale=1,user-scalable=no">
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/common.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="header">
+    <h1>全部产品</h1>
+</header>
+<section class="content">
+    <div id="wrapper">
+        <div id="scroller">
+            <ul class="finance-list">
+            </ul>
+            <div id="pullUp">
+                <span>加载更多</span>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+
+</footer>
+<script type="text/javascript" src="js/iscroll.js"></script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="js/event.js"></script>
+<script type="text/javascript">
+    var str = "";
+    var myScroll = new iScroll("wrapper", {
+        scrollbars: true,
+        fadeScrollbars: true,
+        onScrollMove: function () {
+            if (this.y < 0) {
+                $("#pullUp").addClass("loading");
+            }
+        },
+        onScrollEnd: function () {
+            if (this.y < this.maxScrollY + 1 && $("#pullUp").hasClass("loading")) {
+                getProduct();
+
+            }
+        },
+        onRefresh: function () {
+
+        }
+    });
+    getProduct();
+    function getProduct() {
+        $.ajax({
+            url: "data/data.json",
+            success: function (result) {
+                console.log(str);
+                if (result.errCode == 0 && result.isSuccess) {
+                    for (var i = 0; i < result.datas.length; i++) {
+                        str += "<li class='product-item'>" +
+                                "<h3>" + result.datas[i].title + "</h3>" +
+                                "<dl class=''>" +
+                                "<dt>" +
+                                "<canvas class='product-icon' width='44' height='44'></canvas>" +
+                                "</dt>" +
+                                "<dd>" +
+                                "<table>" +
+                                "<tbody>" +
+                                "<tr class='th'>" +
+                                "<td width='25%'>预期年化</td>" +
+                                "<td width='25%'>年华奖励</td>" +
+                                "<td width='25%'>理财期限</td>" +
+                                "<td width='25%'>起投金额</td>" +
+                                "</tr>" +
+                                "<tr>" +
+                                "<td width='25%' class='text-orange'>" + result.datas[i].yearYield + "%</td>" +
+                                "<td width='25%' class='text-orange'>" + result.datas[i].yearAward + "%</td>" +
+                                "<td width='25%'>" + result.datas[i].term + "天</td>" +
+                                "<td width='25%'>" + result.datas[i].price + "元</td>" +
+                                "</tr>" +
+                                "</tbody>" +
+                                "</table>" +
+                                "</dd>" +
+                                "</dl>" +
+                                "</li>"
+                    }
+                    $(".finance-list").html(str);
+
+
+                    var oCanvas = $(".product-item").find("canvas");
+
+//                    for (var j = 0; j < oCanvas.length; j++) {
+//                        bgCircle(oCanvas[j]);
+//                        console.log(result.datas[j].percent);
+//                        ftCircle(oCanvas[j], result.datas[j].percent);
+//                    }
+                    myScroll.refresh();
+                }
+            }
+        })
+    }
+
+
+    function ftCircle(oCanvas, data) {
+        var oContext = oCanvas.getContext('2d');
+        var oWidth = oCanvas.width;
+        var oHeight = oCanvas.height;
+        var oDeg = Math.PI / 180;
+        var oStart = -Math.PI / 2;
+        var oClose = 360 * (data / 100);
+
+        oContext.lineWidth = 5;
+        oContext.strokeStyle = "orange";
+        oContext.textAlign = "center";
+        oContext.textBaseline = "middle";
+        oContext.fillStyle = "orange";
+
+        oContext.beginPath();
+        oContext.arc(oWidth / 2, oHeight / 2, oWidth / 2 - 3.5, oStart, oDeg * oClose + oStart);
+        oContext.fillText(data + "%", oWidth / 2, oHeight / 2);
+        oContext.stroke();
+        oContext.closePath();
+    }
+    function bgCircle(oCanvas) {
+        var oContext = oCanvas.getContext('2d');
+        var oWidth = oCanvas.width;
+        var oHeight = oCanvas.height;
+        var oPi = Math.PI;
+        var oStart = 0;
+
+        oContext.lineWidth = 5;
+        oContext.strokeStyle = "#ccc";
+        oContext.beginPath();
+        oContext.arc(oWidth / 2, oHeight / 2, oWidth / 2 - 3.5, oStart, 2 * oPi);
+        oContext.stroke();
+        oContext.closePath();
+    }
+
+
+</script>
+</body>
+</html>

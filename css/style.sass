@@ -1,0 +1,62 @@
+body
+  font-size: .12rem
+  position: absolute
+  top: 0
+  bottom: 0
+  width: 100%
+  display: -webkit-flex
+  -webkit-flex-direction: column
+
+.header
+  h1
+
+    font-size: .16rem
+    font-weight: normal
+    text-align: center
+    height: .45rem
+    line-height: .45rem
+    background-color: #dec
+
+.content
+  -webkit-flex: 1
+  overflow: hidden
+  background-color: #eee
+  position: relative
+.finance-list
+  li
+    padding: .15rem .1rem
+    background-color: #fff
+    margin-bottom: .15rem
+    h3
+      line-height: .25rem
+    dl
+      display: -webkit-flex
+      -webkit-flex-direction: row-reverse
+      dt
+        width: 45px
+        height: 45px
+        margin-left: .1rem
+      dd
+        -webkit-flex: 1
+
+        & > table
+          width: 100%
+          tr
+            text-align: center
+            font-size: 14px
+            &:nth-child(1)
+              font-size: 12px
+#wrapper
+  position: absolute
+  top: 0
+  bottom: 0
+  width: 100%
+
+#pullUp
+  background-color: #fff
+  padding: 10px 15px
+  text-align: center
+
+.footer
+  height: .45rem
+  background-color: #dec
